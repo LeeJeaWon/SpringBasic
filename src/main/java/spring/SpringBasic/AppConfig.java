@@ -17,25 +17,24 @@ public class AppConfig {
 
     @Bean
     public MemberService memberService() {
-        // 만든 MemberServiceImpl는 MemoryMemberRepository를 사용한다.
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
-
-    }
-
-    @Bean
-    public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
-    public DiscountPolicy discountPolicy(){
-        //return new FixDiscountPolicy();
-        return new RateDiscountPolicy();
+    public MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
+        return new MemoryMemberRepository();
     }
 
+    @Bean
+    public DiscountPolicy discountPolicy() {
+        return new RateDiscountPolicy();
+    }
 }
